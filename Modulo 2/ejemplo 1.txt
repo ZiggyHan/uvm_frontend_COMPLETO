@@ -1,0 +1,33 @@
+<body>
+
+    <form action="" name="myForm" onsubmit="return validar()">
+        <label for="">RFC</label>
+        <input type="text" name="myRFC" id="rfc1" required>
+        <input type="submit" value="Enviar">
+        <input type="button" value="Verifica" onclick="console.log(validar())">
+    </form>
+
+    <script>
+
+        function validar()
+        {
+            const rfc = document.forms["myForm"][0].value;
+
+            console.log({rfc});
+
+            if (/\w{4}\d{6}\w{3}/.test(rfc))
+            {
+                alert("RFC Correcto");
+                return true;
+            }
+            else
+            {
+                alert("RFC Incorrecto");
+                return  false;
+            }
+    
+        }
+
+    </script>
+    
+</body>

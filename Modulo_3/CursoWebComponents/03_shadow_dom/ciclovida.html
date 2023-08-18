@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+</head>
+<body>
+    <script>
+        window.customElements.define('mi-comp', class extends HTMLElement {
+            //ETAPA DE CONSTRUCCION
+            constructor() {
+                super();
+                this.attachShadow({mode: 'open'});
+
+            }
+            connectedCallback() {
+                this.shadowRoot.innerHTML = `<h1>${this.getAttribute('titulo')}</h1>`
+            }
+            //ETAPA DE ACTUALIZACION
+            static get observedAttibutes() {
+                return ['titulo'];
+            }
+            attributeChangedCallback(name, old, now) {
+                console.log('el nombre del atributo es '+ name +' valor anterior: '+ old + ' valor nuevos es: '+ now);
+                console.log(document.body.querySelector('mi-comp'));
+            }
+            // ETAPA DE MUERTE
+            disconnectedCallback() {
+                console.log('me estoy desconectado', this);
+            }
+        })
+    </script>
+    <mi-comp titulo="Hola desde aqui Alexis"></mi-comp>
+    <mi-comp titulo="otro HOLLAAA Alexis"></mi-comp>
+    <script>
+        setTimeout(() => {
+            let miCopm = document.body.querySelector('mi-comp');
+            document.body.removeChild(miCopm);
+        }, 5000);
+    </script>
+    
+</body>
+</html>
